@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class TopRatedMovieResponse(
     @SerializedName("results")
-    var results: List<Result>
+    var results: MutableList<ResultTopRatedMovie>
 )

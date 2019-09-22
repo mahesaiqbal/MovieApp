@@ -3,7 +3,7 @@ package com.mahesaiqbal.movieapp.data.source.remote.response.trailer
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultTrailerMovie(
     @SerializedName("id")
     var id: String,
     @SerializedName("key")

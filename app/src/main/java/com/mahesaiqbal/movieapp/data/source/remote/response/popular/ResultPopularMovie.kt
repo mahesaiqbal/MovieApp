@@ -1,8 +1,8 @@
-package com.mahesaiqbal.movieapp.data.source.remote.response.toprated
+package com.mahesaiqbal.movieapp.data.source.remote.response.popular
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultPopularMovie(
     @SerializedName("id")
     var id: Int,
     @SerializedName("backdrop_path")
