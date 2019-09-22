@@ -1,57 +1,26 @@
 package com.mahesaiqbal.movieapp.data.source.remote.response.detail
 
-
 import com.google.gson.annotations.SerializedName
 
 data class DetailResponse(
-    @SerializedName("adult")
-    val adult: Boolean,
-    @SerializedName("backdrop_path")
-    val backdropPath: String,
-    @SerializedName("belongs_to_collection")
-    val belongsToCollection: BelongsToCollection,
-    @SerializedName("budget")
-    val budget: Int,
-    @SerializedName("genres")
-    val genres: List<Genre>,
-    @SerializedName("homepage")
-    val homepage: String,
     @SerializedName("id")
-    val id: Int,
-    @SerializedName("imdb_id")
-    val imdbId: String,
+    var id: Int,
+    @SerializedName("backdrop_path")
+    var backdropPath: String,
     @SerializedName("original_language")
-    val originalLanguage: String,
-    @SerializedName("original_title")
-    val originalTitle: String,
+    var originalLanguage: String,
     @SerializedName("overview")
-    val overview: String,
+    var overview: String,
     @SerializedName("popularity")
-    val popularity: Double,
+    var popularity: Double,
     @SerializedName("poster_path")
-    val posterPath: String,
-    @SerializedName("production_companies")
-    val productionCompanies: List<ProductionCompany>,
-    @SerializedName("production_countries")
-    val productionCountries: List<ProductionCountry>,
+    var posterPath: String,
     @SerializedName("release_date")
-    val releaseDate: String,
-    @SerializedName("revenue")
-    val revenue: Int,
-    @SerializedName("runtime")
-    val runtime: Int,
-    @SerializedName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>,
-    @SerializedName("status")
-    val status: String,
-    @SerializedName("tagline")
-    val tagline: String,
+    var releaseDate: String,
     @SerializedName("title")
-    val title: String,
-    @SerializedName("video")
-    val video: Boolean,
+    var title: String,
     @SerializedName("vote_average")
-    val voteAverage: Double,
+    var voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int
+    var voteCount: Int
 )
