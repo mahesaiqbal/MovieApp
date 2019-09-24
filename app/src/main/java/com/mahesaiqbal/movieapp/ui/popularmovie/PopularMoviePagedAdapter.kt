@@ -14,7 +14,7 @@ import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.Popu
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.PopularMovieViewHolder
 import kotlinx.android.synthetic.main.item_popular_movie.view.*
 
-class PopularMoviePagedAdapter(var callback: PopularMovieCallback) :
+class PopularMoviePagedAdapter(var callback: PopularMovieCallback, var favoriteCallback: FavoritePopularMovieCallback) :
     PagedListAdapter<PopularMovieEntity, PopularMovieViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -42,6 +42,7 @@ class PopularMoviePagedAdapter(var callback: PopularMovieCallback) :
 
         fun bindItem(popularMovie: PopularMovieEntity, callback: PopularMovieCallback) {
             itemView.tv_title.text = popularMovie.title
+            itemView.img_favorited.setOnClickListener { favoriteCallback.onFavoriteClick(popularMovie) }
 
             if (popularMovie.favorited) {
                 itemView.img_favorited.setImageResource(R.drawable.ic_favorite_red)
@@ -63,5 +64,9 @@ class PopularMoviePagedAdapter(var callback: PopularMovieCallback) :
 
     interface PopularMovieCallback {
         fun onItemClick(popularMovie: PopularMovieEntity)
+    }
+
+    interface FavoritePopularMovieCallback {
+        fun onFavoriteClick(popularMovie: PopularMovieEntity)
     }
 }

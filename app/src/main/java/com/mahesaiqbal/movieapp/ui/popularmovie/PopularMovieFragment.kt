@@ -11,17 +11,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.PopularMovieCallback
+import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.FavoritePopularMovieCallback
 import com.mahesaiqbal.movieapp.vo.Resource
 import com.mahesaiqbal.movieapp.vo.Status.*
 import kotlinx.android.synthetic.main.fragment_popular_movie.*
 
-class PopularMovieFragment : Fragment(), PopularMovieCallback {
+class PopularMovieFragment : Fragment(), PopularMovieCallback, FavoritePopularMovieCallback {
 
     lateinit var popularMovieAdapter: PopularMoviePagedAdapter
     lateinit var viewModel: PopularMovieViewModel
@@ -47,7 +47,7 @@ class PopularMovieFragment : Fragment(), PopularMovieCallback {
 
             viewModel = obtainViewModel(activity!!)
 
-            popularMovieAdapter = PopularMoviePagedAdapter(this)
+            popularMovieAdapter = PopularMoviePagedAdapter(this, this)
 
             viewModel.getAllMovies().observe(this, getPopularMovie)
 
@@ -78,6 +78,10 @@ class PopularMovieFragment : Fragment(), PopularMovieCallback {
     }
 
     override fun onItemClick(popularMovie: PopularMovieEntity) {
+        Toast.makeText(activity, popularMovie.title, Toast.LENGTH_SHORT).show()
+    }
 
+    override fun onFavoriteClick(popularMovie: PopularMovieEntity) {
+        Toast.makeText(activity, "${popularMovie.title} is favorited", Toast.LENGTH_SHORT).show()
     }
 }
