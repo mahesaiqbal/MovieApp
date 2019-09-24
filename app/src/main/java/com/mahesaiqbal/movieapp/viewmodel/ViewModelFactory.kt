@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import com.mahesaiqbal.movieapp.data.source.MovieRepository
 import com.mahesaiqbal.movieapp.di.Injection
 import com.mahesaiqbal.movieapp.ui.favorite.popularmovie.FavoritePopularMovieViewModel
+import com.mahesaiqbal.movieapp.ui.favorite.toprated.FavoriteTopRatedMovieViewModel
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMovieViewModel
 import com.mahesaiqbal.movieapp.ui.toprated.TopRatedMovieViewModel
 
@@ -36,6 +37,8 @@ class ViewModelFactory(movieRepository: MovieRepository) : NewInstanceFactory() 
             return FavoritePopularMovieViewModel(mMovieRepository) as T
         } else if (modelClass.isAssignableFrom(TopRatedMovieViewModel::class.java)) {
             return TopRatedMovieViewModel(mMovieRepository) as T
+        } else if (modelClass.isAssignableFrom(FavoriteTopRatedMovieViewModel::class.java)) {
+            return FavoriteTopRatedMovieViewModel(mMovieRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

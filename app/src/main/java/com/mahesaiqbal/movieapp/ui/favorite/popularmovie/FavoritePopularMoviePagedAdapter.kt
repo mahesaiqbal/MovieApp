@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mahesaiqbal.movieapp.R
@@ -40,7 +40,7 @@ class FavoritePopularMoviePagedAdapter(var callback: FavoritePopularMovieCallbac
 
     fun getItemById(swipedPosition: Int): PopularMovieEntity = getItem(swipedPosition)!!
 
-    inner class FavoritePopularMovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavoritePopularMovieViewHolder(itemView: View) : ViewHolder(itemView) {
 
         fun bindItem(popularMovie: PopularMovieEntity, callback: FavoritePopularMovieCallback) {
             itemView.tv_title.text = popularMovie.title
