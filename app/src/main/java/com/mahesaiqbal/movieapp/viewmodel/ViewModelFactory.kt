@@ -7,6 +7,7 @@ import com.mahesaiqbal.movieapp.data.source.MovieRepository
 import com.mahesaiqbal.movieapp.di.Injection
 import com.mahesaiqbal.movieapp.ui.favorite.popularmovie.FavoritePopularMovieViewModel
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMovieViewModel
+import com.mahesaiqbal.movieapp.ui.toprated.TopRatedMovieViewModel
 
 class ViewModelFactory(movieRepository: MovieRepository) : NewInstanceFactory() {
 
@@ -33,6 +34,8 @@ class ViewModelFactory(movieRepository: MovieRepository) : NewInstanceFactory() 
             return PopularMovieViewModel(mMovieRepository) as T
         } else if (modelClass.isAssignableFrom(FavoritePopularMovieViewModel::class.java)) {
             return FavoritePopularMovieViewModel(mMovieRepository) as T
+        } else if (modelClass.isAssignableFrom(TopRatedMovieViewModel::class.java)) {
+            return TopRatedMovieViewModel(mMovieRepository) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
