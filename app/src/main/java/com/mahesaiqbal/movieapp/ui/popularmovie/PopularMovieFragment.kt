@@ -82,6 +82,10 @@ class PopularMovieFragment : Fragment(), PopularMovieCallback, FavoritePopularMo
     }
 
     override fun onFavoriteClick(popularMovie: PopularMovieEntity) {
-        Toast.makeText(activity, "${popularMovie.title} is favorited", Toast.LENGTH_SHORT).show()
+        val newState = !popularMovie.favorited
+
+        viewModel.setFavorite(popularMovie, newState)
+
+        popularMovieAdapter.notifyDataSetChanged()
     }
 }
