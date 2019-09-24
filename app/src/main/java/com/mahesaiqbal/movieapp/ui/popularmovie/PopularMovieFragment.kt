@@ -49,7 +49,7 @@ class PopularMovieFragment : Fragment(), PopularMovieCallback, FavoritePopularMo
 
             popularMovieAdapter = PopularMoviePagedAdapter(this, this)
 
-            viewModel.getAllMovies().observe(this, getPopularMovie)
+            viewModel.getAllPopularMovies().observe(this, getPopularMovie)
 
             rv_popular_movie.apply {
                 layoutManager = GridLayoutManager(context, 2)

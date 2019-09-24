@@ -14,7 +14,7 @@ class PopularMovieViewModel(var movieRepository: MovieRepository) : ViewModel() 
 
     private val remoteRepository = RemoteRepository()
 
-    fun getAllMovies(): LiveData<Resource<PagedList<PopularMovieEntity>>> = movieRepository.getAllPopularMovies()
+    fun getAllPopularMovies(): LiveData<Resource<PagedList<PopularMovieEntity>>> = movieRepository.getAllPopularMovies()
 
     fun setFavorite(popularMovie: PopularMovieEntity, newState: Boolean) {
         movieRepository.setPopularMovieFavorited(popularMovie, newState)
