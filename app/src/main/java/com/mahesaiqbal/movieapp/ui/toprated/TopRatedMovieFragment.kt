@@ -1,5 +1,6 @@
 package com.mahesaiqbal.movieapp.ui.toprated
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.topratedmovieentity.TopRatedMovieEntity
+import com.mahesaiqbal.movieapp.ui.detail.topratedmovie.DetailTopRatedMovieActivity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.toprated.TopRatedMoviePagedAdapter.TopRatedMovieCallback
 import com.mahesaiqbal.movieapp.ui.toprated.TopRatedMoviePagedAdapter.FavoriteTopRatedMovieCallback
@@ -78,7 +80,9 @@ class TopRatedMovieFragment : Fragment(), TopRatedMovieCallback, FavoriteTopRate
     }
 
     override fun onItemClick(topRatedMovie: TopRatedMovieEntity) {
-        Toast.makeText(activity, topRatedMovie.title, Toast.LENGTH_SHORT).show()
+        val intent = Intent(activity, DetailTopRatedMovieActivity::class.java)
+        intent.putExtra("movie_id", topRatedMovie.id)
+        startActivity(intent)
     }
 
     override fun onFavoriteClick(topRatedMovie: TopRatedMovieEntity) {

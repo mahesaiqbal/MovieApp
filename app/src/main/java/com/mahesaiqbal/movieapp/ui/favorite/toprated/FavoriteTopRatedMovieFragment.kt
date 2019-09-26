@@ -1,5 +1,6 @@
 package com.mahesaiqbal.movieapp.ui.favorite.toprated
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.topratedmovieentity.TopRatedMovieEntity
+import com.mahesaiqbal.movieapp.ui.detail.topratedmovie.DetailTopRatedMovieActivity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.favorite.toprated.FavoriteTopRatedMoviePagedAdapter.FavoriteTopRatedMovieCallback
 import com.mahesaiqbal.movieapp.vo.Resource
@@ -101,6 +103,8 @@ class FavoriteTopRatedMovieFragment : Fragment(), FavoriteTopRatedMovieCallback 
     })
 
     override fun onItemClick(topRatedMovie: TopRatedMovieEntity) {
-
+        val intent = Intent(activity, DetailTopRatedMovieActivity::class.java)
+        intent.putExtra("movie_id", topRatedMovie.id)
+        startActivity(intent)
     }
 }

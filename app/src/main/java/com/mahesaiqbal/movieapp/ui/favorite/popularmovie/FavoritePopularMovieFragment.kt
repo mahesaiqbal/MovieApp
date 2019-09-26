@@ -1,5 +1,6 @@
 package com.mahesaiqbal.movieapp.ui.favorite.popularmovie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.google.android.material.snackbar.Snackbar
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
+import com.mahesaiqbal.movieapp.ui.detail.popularmovie.DetailPopularMovieActivity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.favorite.popularmovie.FavoritePopularMoviePagedAdapter.FavoritePopularMovieCallback
 import com.mahesaiqbal.movieapp.vo.Resource
@@ -101,6 +103,8 @@ class FavoritePopularMovieFragment : Fragment(), FavoritePopularMovieCallback {
     })
 
     override fun onItemClick(popularMovie: PopularMovieEntity) {
-
+        val intent = Intent(activity, DetailPopularMovieActivity::class.java)
+        intent.putExtra("movie_id", popularMovie.id)
+        startActivity(intent)
     }
 }
