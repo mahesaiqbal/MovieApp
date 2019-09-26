@@ -1,5 +1,6 @@
 package com.mahesaiqbal.movieapp.ui.popularmovie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
+import com.mahesaiqbal.movieapp.ui.detail.DetailPopularMovieActivity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.PopularMovieCallback
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.FavoritePopularMovieCallback
@@ -78,7 +80,9 @@ class PopularMovieFragment : Fragment(), PopularMovieCallback, FavoritePopularMo
     }
 
     override fun onItemClick(popularMovie: PopularMovieEntity) {
-        Toast.makeText(activity, popularMovie.title, Toast.LENGTH_SHORT).show()
+        val intent = Intent(activity, DetailPopularMovieActivity::class.java)
+        intent.putExtra("movie_id", popularMovie.id)
+        startActivity(intent)
     }
 
     override fun onFavoriteClick(popularMovie: PopularMovieEntity) {
