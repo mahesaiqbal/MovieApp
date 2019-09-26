@@ -20,7 +20,7 @@ class DetailPopularMovieViewModel(var movieRepository: MovieRepository) : ViewMo
         movieId.value = id
     }
 
-//    fun getDetailPopularMovieTest(): LiveData<Resource<PopularMovieEntity>> = movieRepository.getDetailPopularMovie(429203)
+    fun getDetailPopularMovieTest(): LiveData<Resource<PopularMovieEntity>> = movieRepository.getDetailPopularMovie(429617)
 
     var popularMovieDetail: LiveData<Resource<PopularMovieEntity>> = Transformations.switchMap(movieId) {
             movieId -> movieRepository.getDetailPopularMovie(movieId)
@@ -36,18 +36,12 @@ class DetailPopularMovieViewModel(var movieRepository: MovieRepository) : ViewMo
         }
     }
 
-//    fun getTrailerMovie(): LiveData<Resource<PagedList<TrailerMovieEntity>>> = movieRepository.getTrailerMovie(movieId.value!!)
-
-//    var trailerMovie: LiveData<Resource<PagedList<TrailerMovieEntity>>> = Transformations.switchMap(movieId) {
-//            movieId -> movieRepository.getTrailerMovie(movieId)
-//    }
-
-    var movie = MutableLiveData<MutableList<ResultTrailerMovie>>()
+    var trailerMovie = MutableLiveData<MutableList<ResultTrailerMovie>>()
 
     fun getAllTrailerMovies(): MutableLiveData<MutableList<ResultTrailerMovie>> = movieRepository.getTrailerMovie(movieId.value!!)
 
     fun getTrailerMovies() {
-        movie = movieRepository.getTrailerMovie(movieId.value!!)
+        trailerMovie = movieRepository.getTrailerMovie(429617)
     }
 
     override fun onCleared() {

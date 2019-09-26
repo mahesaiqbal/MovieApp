@@ -50,8 +50,6 @@ class TopRatedMoviePagedAdapter(var callback: TopRatedMovieCallback, var favorit
                 itemView.img_favorited.setImageResource(R.drawable.ic_favorite_grey)
             }
 
-            itemView.tv_categories.text = "Movie Categories"
-
             itemView.setOnClickListener { callback.onItemClick(topRatedMovie) }
 
             Glide.with(itemView.context)
