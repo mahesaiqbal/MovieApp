@@ -19,7 +19,7 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 @RunWith(JUnit4::class)
-class FavoritePopularMovieViewModelTest {
+class FavoriteTopRatedMovieViewModelTest {
 
     @Rule
     @JvmField
