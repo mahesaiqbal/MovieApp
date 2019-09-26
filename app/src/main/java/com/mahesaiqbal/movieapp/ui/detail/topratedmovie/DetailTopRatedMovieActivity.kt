@@ -15,6 +15,7 @@ import com.mahesaiqbal.movieapp.data.source.local.entity.topratedmovieentity.Top
 import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
 import com.mahesaiqbal.movieapp.ui.detail.TrailerMovieAdapter
 import com.mahesaiqbal.movieapp.ui.detail.TrailerMovieAdapter.TrailerMovieCallback
+import com.mahesaiqbal.movieapp.utils.dateFormat
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.vo.Resource
 import com.mahesaiqbal.movieapp.vo.Status
@@ -113,7 +114,7 @@ class DetailTopRatedMovieActivity : AppCompatActivity(), TrailerMovieCallback {
 
     private fun populateMovie(movie: TopRatedMovieEntity) {
         tv_title.text = movie.title
-        tv_release_date.text = movie.releaseDate
+        tv_release_date.text = dateFormat(movie.releaseDate)
         tv_overview.text = movie.overview
         tv_vote_average.text = "${movie.voteAverage}/10"
         tv_vote_count.text = "${movie.voteCount} votes"
