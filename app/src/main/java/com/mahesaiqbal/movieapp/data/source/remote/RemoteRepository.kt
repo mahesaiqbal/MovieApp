@@ -7,6 +7,8 @@ import com.mahesaiqbal.movieapp.data.source.remote.response.popular.PopularMovie
 import com.mahesaiqbal.movieapp.data.source.remote.response.popular.ResultPopularMovie
 import com.mahesaiqbal.movieapp.data.source.remote.response.toprated.ResultTopRatedMovie
 import com.mahesaiqbal.movieapp.data.source.remote.response.toprated.TopRatedMovieResponse
+import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
+import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.TrailerResponse
 import com.mahesaiqbal.movieapp.network.Client
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -113,7 +115,36 @@ class RemoteRepository {
         return result
     }
 
+    fun getTrailerMovie(movieId: Int, callback: LoadTrailerCallback) {
+
+        apiService.getTrailerMovie(movieId, API_KEY)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<TrailerResponse> {
+                override fun onSubscribe(d: Disposable) {
+                    compositeDisposable.add(d)
+                }
+
+                override fun onNext(t: TrailerResponse) {
+                    callback.onTrailerReceived(t.results)
+                }
+
+                override fun onError(e: Throwable) {
+                    e.printStackTrace()
+                }
+
+                override fun onComplete() {
+
+                }
+            })
+    }
+
     fun onDestroy() {
         compositeDisposable.clear()
+    }
+
+    interface LoadTrailerCallback {
+        fun onTrailerReceived(trailer: MutableList<ResultTrailerMovie>)
+        fun onDataNotAvailable()
     }
 }

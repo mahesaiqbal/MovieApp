@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
-import com.mahesaiqbal.movieapp.ui.detail.DetailPopularMovieActivity
+import com.mahesaiqbal.movieapp.ui.detail.popularmovie.DetailPopularMovieActivity
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.PopularMovieCallback
 import com.mahesaiqbal.movieapp.ui.popularmovie.PopularMoviePagedAdapter.FavoritePopularMovieCallback

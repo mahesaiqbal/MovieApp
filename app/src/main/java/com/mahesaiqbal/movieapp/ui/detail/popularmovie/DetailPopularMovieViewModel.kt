@@ -1,4 +1,4 @@
-package com.mahesaiqbal.movieapp.ui.detail
+package com.mahesaiqbal.movieapp.ui.detail.popularmovie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.mahesaiqbal.movieapp.data.source.MovieRepository
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
 import com.mahesaiqbal.movieapp.data.source.remote.RemoteRepository
+import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
 import com.mahesaiqbal.movieapp.vo.Resource
 
 class DetailPopularMovieViewModel(var movieRepository: MovieRepository) : ViewModel() {
@@ -33,6 +34,20 @@ class DetailPopularMovieViewModel(var movieRepository: MovieRepository) : ViewMo
 
             movieRepository.setPopularMovieFavorited(popularMovieEntity, newState)
         }
+    }
+
+//    fun getTrailerMovie(): LiveData<Resource<PagedList<TrailerMovieEntity>>> = movieRepository.getTrailerMovie(movieId.value!!)
+
+//    var trailerMovie: LiveData<Resource<PagedList<TrailerMovieEntity>>> = Transformations.switchMap(movieId) {
+//            movieId -> movieRepository.getTrailerMovie(movieId)
+//    }
+
+    var movie = MutableLiveData<MutableList<ResultTrailerMovie>>()
+
+    fun getAllTrailerMovies(): MutableLiveData<MutableList<ResultTrailerMovie>> = movieRepository.getTrailerMovie(movieId.value!!)
+
+    fun getTrailerMovies() {
+        movie = movieRepository.getTrailerMovie(movieId.value!!)
     }
 
     override fun onCleared() {

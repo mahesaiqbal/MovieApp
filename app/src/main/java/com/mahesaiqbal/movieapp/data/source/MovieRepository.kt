@@ -1,6 +1,8 @@
 package com.mahesaiqbal.movieapp.data.source
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.mahesaiqbal.movieapp.data.source.local.LocalRepository
@@ -11,6 +13,7 @@ import com.mahesaiqbal.movieapp.data.source.remote.RemoteRepository
 import com.mahesaiqbal.movieapp.data.source.remote.response.detail.DetailResponse
 import com.mahesaiqbal.movieapp.data.source.remote.response.popular.ResultPopularMovie
 import com.mahesaiqbal.movieapp.data.source.remote.response.toprated.ResultTopRatedMovie
+import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
 import com.mahesaiqbal.movieapp.utils.AppExecutors
 import com.mahesaiqbal.movieapp.vo.Resource
 
@@ -206,6 +209,23 @@ class MovieRepository(
             }
 
         }.asLiveData()
+    }
+
+    override fun getTrailerMovie(movieId: Int): MutableLiveData<MutableList<ResultTrailerMovie>> {
+        val trailerResults: MutableLiveData<MutableList<ResultTrailerMovie>> = MutableLiveData()
+
+        remoteRepository.getTrailerMovie(movieId, object : RemoteRepository.LoadTrailerCallback {
+            override fun onTrailerReceived(trailer: MutableList<ResultTrailerMovie>) {
+                trailerResults.postValue(trailer)
+            }
+
+            override fun onDataNotAvailable() {
+
+            }
+
+        })
+
+        return trailerResults
     }
 
     override fun setPopularMovieFavorited(popularMovie: PopularMovieEntity, state: Boolean) {

@@ -6,10 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
 import com.mahesaiqbal.movieapp.data.source.local.entity.topratedmovieentity.TopRatedMovieEntity
-import com.mahesaiqbal.movieapp.data.source.local.entity.trailerentity.TrailerMovieEntity
 
 @Database(
-    entities = arrayOf(PopularMovieEntity::class, TopRatedMovieEntity::class, TrailerMovieEntity::class),
+    entities = arrayOf(PopularMovieEntity::class, TopRatedMovieEntity::class),
     version = 1,
     exportSchema = false
 )

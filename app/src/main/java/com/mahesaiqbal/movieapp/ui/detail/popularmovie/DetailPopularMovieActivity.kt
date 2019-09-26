@@ -1,23 +1,29 @@
-package com.mahesaiqbal.movieapp.ui.detail
+package com.mahesaiqbal.movieapp.ui.detail.popularmovie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.mahesaiqbal.movieapp.R
 import com.mahesaiqbal.movieapp.data.source.local.entity.popularmovieentity.PopularMovieEntity
+import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
+import com.mahesaiqbal.movieapp.ui.detail.TrailerMovieAdapter
+import com.mahesaiqbal.movieapp.ui.detail.TrailerMovieAdapter.TrailerMovieCallback
 import com.mahesaiqbal.movieapp.viewmodel.ViewModelFactory
 import com.mahesaiqbal.movieapp.vo.Resource
 import com.mahesaiqbal.movieapp.vo.Status.*
 import kotlinx.android.synthetic.main.activity_detail_popular_movie.*
 
-class DetailPopularMovieActivity : AppCompatActivity() {
+class DetailPopularMovieActivity : AppCompatActivity(), TrailerMovieCallback {
 
+    lateinit var trailerMovieAdapter: TrailerMovieAdapter
     lateinit var viewModel: DetailPopularMovieViewModel
+
+    var trailers: MutableList<ResultTrailerMovie> = mutableListOf()
 
     companion object {
         fun obtainViewModel(activity: AppCompatActivity): DetailPopularMovieViewModel {
@@ -40,9 +46,15 @@ class DetailPopularMovieActivity : AppCompatActivity() {
             }
         }
 
+        progress_bar.visibility = View.VISIBLE
+
+        trailerMovieAdapter = TrailerMovieAdapter(trailers, this)
+
         viewModel.popularMovieDetail.observe(this, getDetailMovie)
 
         viewModel.popularMovieDetail.observe(this, movieFavorited)
+
+        viewModel.getAllTrailerMovies().observe(this, getTrailers)
 
         favoriteMovieCLicked()
     }
@@ -77,11 +89,23 @@ class DetailPopularMovieActivity : AppCompatActivity() {
                     val state = movieFavorited.data.favorited
                     setFavoriteState(state)
                 }
-                ERROR -> {
-                    progress_bar.visibility = View.GONE
-                    Toast.makeText(getApplicationContext(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                }
+                ERROR -> progress_bar.visibility = View.GONE
             }
+        }
+    }
+
+    private val getTrailers = Observer<MutableList<ResultTrailerMovie>> { resultTrailer ->
+        if (resultTrailer != null) {
+            progress_bar.visibility = View.GONE
+            trailerMovieAdapter = TrailerMovieAdapter(resultTrailer, this)
+
+            rv_trailers.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = trailerMovieAdapter
+            }
+
+            trailerMovieAdapter.notifyDataSetChanged()
         }
     }
 
@@ -110,5 +134,9 @@ class DetailPopularMovieActivity : AppCompatActivity() {
         } else {
             img_favorited.setImageResource(R.drawable.ic_favorite_grey)
         }
+    }
+
+    override fun onTrailerClick(trailerMovie: ResultTrailerMovie) {
+
     }
 }

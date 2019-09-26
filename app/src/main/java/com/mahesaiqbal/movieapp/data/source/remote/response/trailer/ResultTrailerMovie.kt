@@ -11,5 +11,7 @@ data class ResultTrailerMovie(
     @SerializedName("name")
     var name: String,
     @SerializedName("site")
-    var site: String
+    var site: String,
+    @SerializedName("size")
+    var size: Int
 )
