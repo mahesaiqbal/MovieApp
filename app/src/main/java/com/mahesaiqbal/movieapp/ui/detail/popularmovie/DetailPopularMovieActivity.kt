@@ -1,5 +1,7 @@
 package com.mahesaiqbal.movieapp.ui.detail.popularmovie
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -137,6 +139,8 @@ class DetailPopularMovieActivity : AppCompatActivity(), TrailerMovieCallback {
     }
 
     override fun onTrailerClick(trailerMovie: ResultTrailerMovie) {
-
+        val youtubeUrl = "https://www.youtube.com/watch?v=${trailerMovie.key}"
+        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl))
+        startActivity(webIntent)
     }
 }
