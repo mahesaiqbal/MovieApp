@@ -21,8 +21,7 @@
             <ImageView
                 android:id="@+id/img_backdrop_path"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/colorPrimary" />
+                android:layout_height="200dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -133,9 +132,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
+                    android:text="@string/overview"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="Overview" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_overview"
@@ -155,6 +154,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cv_overview"
             tools:text="Trailers" />
@@ -164,9 +165,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_trailer_title"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_trailer_title" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

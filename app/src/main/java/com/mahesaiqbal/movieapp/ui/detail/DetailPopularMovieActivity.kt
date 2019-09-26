@@ -44,10 +44,10 @@ class DetailPopularMovieActivity : AppCompatActivity() {
 
         viewModel.popularMovieDetail.observe(this, movieFavorited)
 
-        setFavoriteMovie()
+        favoriteMovieCLicked()
     }
 
-    private fun setFavoriteMovie() {
+    private fun favoriteMovieCLicked() {
         img_favorited.setOnClickListener {
             viewModel.setFavorite()
         }
@@ -89,11 +89,19 @@ class DetailPopularMovieActivity : AppCompatActivity() {
         tv_title.text = movie.title
         tv_release_date.text = movie.releaseDate
         tv_overview.text = movie.overview
+        tv_vote_average.text = "${movie.voteAverage}/10"
+        tv_vote_count.text = "${movie.voteCount} votes"
+        tv_original_language.text = movie.originalLanguage
 
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
             .apply(RequestOptions.placeholderOf(R.drawable.ic_load).error(R.drawable.ic_sad))
             .into(img_poster_path)
+
+        Glide.with(this)
+            .load("https://image.tmdb.org/t/p/original${movie.backdropPath}")
+            .apply(RequestOptions.placeholderOf(R.drawable.ic_load).error(R.drawable.ic_sad))
+            .into(img_backdrop_path)
     }
 
     private fun setFavoriteState(state: Boolean) {
