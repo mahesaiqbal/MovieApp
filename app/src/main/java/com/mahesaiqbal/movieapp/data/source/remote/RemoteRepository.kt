@@ -10,6 +10,7 @@ import com.mahesaiqbal.movieapp.data.source.remote.response.toprated.TopRatedMov
 import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.ResultTrailerMovie
 import com.mahesaiqbal.movieapp.data.source.remote.response.trailer.TrailerResponse
 import com.mahesaiqbal.movieapp.network.Client
+import com.mahesaiqbal.movieapp.utils.EspressoIdlingResource
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,6 +36,8 @@ class RemoteRepository {
     val API_KEY = "49a79f125a171a70aafeaefdc6f406b8"
 
     fun getAllPopularMovie(): LiveData<ApiResponse<MutableList<ResultPopularMovie>>> {
+        EspressoIdlingResource.increment()
+
         val resultPopularMovie: MutableLiveData<ApiResponse<MutableList<ResultPopularMovie>>> = MutableLiveData()
 
         apiService.getPopularMovie(API_KEY)
@@ -54,7 +57,9 @@ class RemoteRepository {
                 }
 
                 override fun onComplete() {
-
+                    if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                        EspressoIdlingResource.decrement()
+                    }
                 }
             })
 
@@ -62,6 +67,8 @@ class RemoteRepository {
     }
 
     fun getAllTopRatedMovie(): LiveData<ApiResponse<MutableList<ResultTopRatedMovie>>> {
+        EspressoIdlingResource.increment()
+
         val resultTopRatedMovie: MutableLiveData<ApiResponse<MutableList<ResultTopRatedMovie>>> = MutableLiveData()
 
         apiService.getTopRatedMovie(API_KEY)
@@ -81,7 +88,9 @@ class RemoteRepository {
                 }
 
                 override fun onComplete() {
-
+                    if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                        EspressoIdlingResource.decrement()
+                    }
                 }
             })
 
@@ -89,6 +98,8 @@ class RemoteRepository {
     }
 
     fun getDetailMovie(movieId: Int): LiveData<ApiResponse<DetailResponse>> {
+        EspressoIdlingResource.increment()
+
         val result: MutableLiveData<ApiResponse<DetailResponse>> = MutableLiveData()
 
         apiService.getDetailMovie(movieId, API_KEY)
@@ -108,7 +119,9 @@ class RemoteRepository {
                 }
 
                 override fun onComplete() {
-
+                    if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                        EspressoIdlingResource.decrement()
+                    }
                 }
             })
 
@@ -116,6 +129,7 @@ class RemoteRepository {
     }
 
     fun getTrailerMovie(movieId: Int, callback: LoadTrailerCallback) {
+        EspressoIdlingResource.increment()
 
         apiService.getTrailerMovie(movieId, API_KEY)
             .subscribeOn(Schedulers.io())
@@ -134,7 +148,9 @@ class RemoteRepository {
                 }
 
                 override fun onComplete() {
-
+                    if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
+                        EspressoIdlingResource.decrement()
+                    }
                 }
             })
     }
