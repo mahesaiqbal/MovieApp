@@ -10,13 +10,13 @@ import com.mahesaiqbal.movieapp.ui.toprated.TopRatedMovieFragment
 
 class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> PopularMovieFragment()
             1 -> TopRatedMovieFragment()
             2 -> FavoritePopularMovieFragment()
             3 -> FavoriteTopRatedMovieFragment()
-            else -> null
+            else -> Fragment()
         }
     }
 
